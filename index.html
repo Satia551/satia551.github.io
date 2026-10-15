@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jolanta Łodziana · Junior Software Engineer (C#, .NET, SQL)</title>
+    <meta name="description" content="Portfolio of Jolanta Łodziana, Junior Software Engineer specializing in C#, .NET, WPF, and MS SQL Server. Based in Vienna, Austria." />
+    <meta property="og:title" content="Jolanta Łodziana · Junior Software Engineer (C#, .NET, SQL)" />
+    <meta property="og:description" content="Portfolio of Jolanta Łodziana, Junior Software Engineer specializing in C#, .NET, WPF, and MS SQL Server. Based in Vienna, Austria." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              canvas: '#090D16',
+              surface: '#0E1322',
+              surfaceAlt: '#070A11',
+              borderSlate: '#1E293B',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #090D16;
+        color: #F8FAFC;
+      }
+      code, pre, .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #090D16;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1E293B;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155;
+      }
+      @media print {
+        header, footer, .no-print {
+          display: none !important;
+        }
+        body {
+          background: white !important;
+          color: black !important;
+        }
+        #cv-modal {
+          position: static !important;
+          background: white !important;
+          padding: 0 !important;
+        }
+        #cv-modal-content {
+          border: none !important;
+          box-shadow: none !important;
+          max-height: none !important;
+          padding: 0 !important;
+          color: black !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-[#090D16] text-slate-100 antialiased selection:bg-sky-500/20 selection:text-sky-300 min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar (Strict 3-Zone Contract) -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#090D16]/95 backdrop-blur-md">
+      <div class="max-w-6xl mx-auto flex items-center justify-between gap-8 px-4 sm:px-6 h-16">
+        <!-- Zone 1: Wordmark -->
+        <a href="#" class="text-base sm:text-lg font-bold tracking-tight text-white hover:text-sky-400 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-sm bg-gradient-to-tr from-sky-500 to-indigo-500"></span>
+          <span>Jolanta Łodziana</span>
+          <span class="hidden sm:inline text-xs font-mono text-slate-500 font-normal">· C# / .NET</span>
+        </a>
+
+        <!-- Zone 2: Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+          <a href="#projects" class="hover:text-sky-400 transition-colors whitespace-nowrap shrink-0" data-i18n="navProjects">Projects</a>
+          <a href="#skills" class="hover:text-sky-400 transition-colors whitespace-nowrap shrink-0" data-i18n="navSkills">Skills & Tools</a>
+          <a href="#timeline" class="hover:text-sky-400 transition-colors whitespace-nowrap shrink-0" data-i18n="navTimeline">Experience & Courses</a>
+          <a href="#contact" class="hover:text-sky-400 transition-colors whitespace-nowrap shrink-0" data-i18n="navContact">Contact</a>
+        </nav>
+
+        <!-- Zone 3: Language Toggle & Resume Modal -->
+        <div class="flex items-center gap-3 shrink-0">
+          <!-- Language Switcher -->
+          <div class="flex items-center rounded-lg border border-slate-700/80 bg-slate-900/90 p-0.5 text-xs font-mono">
+            <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2 py-1 rounded transition-colors bg-sky-500 text-slate-950 font-bold shadow-sm" title="Switch to English">EN</button>
+            <button id="btn-lang-de" onclick="setLanguage('de')" class="px-2 py-1 rounded transition-colors text-slate-400 hover:text-slate-200" title="Auf Deutsch umschalten">DE</button>
+          </div>
+
+          <!-- CV Modal Button -->
+          <button onclick="openCvModal()" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span data-i18n="navResume">CV Summary</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="relative pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-slate-800/60 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-sky-500/5 blur-[120px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+          <!-- Location and Target Role Kicker -->
+          <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 mb-6 font-mono">
+            <span class="flex items-center gap-1.5 text-sky-400 font-medium">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>Vienna, Austria</span>
+            </span>
+            <span class="text-slate-600">/</span>
+            <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span data-i18n="heroRoles">Junior Developer · Trainee · IT Internship</span>
+            </span>
+          </div>
+
+          <!-- Hero Headline -->
+          <div class="max-w-3xl space-y-4">
+            <div class="text-xs uppercase font-mono tracking-widest text-sky-400 font-semibold flex items-center gap-2">
+              <span>Jolanta Łodziana</span>
+              <span class="text-slate-600">·</span>
+              <span data-i18n="heroRole">Junior Software Engineer (C#, .NET, SQL)</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.12]" data-i18n="heroHeadline">
+              Building robust desktop applications & clean relational database systems.
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl pt-2" data-i18n="heroSummary">
+              Passionate software developer with solid competencies in C#, .NET, WPF, XAML, and MS SQL Server. Dedicated self-starter with continuous practical experience developing desktop CRUD applications, clean OOP architectures, and parameterized database queries.
+            </p>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-3 pt-8 pb-12">
+            <a href="#projects" class="px-5 py-2.5 text-sm font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-lg transition-all shadow-md shadow-sky-500/10 flex items-center gap-2">
+              <span data-i18n="heroPrimaryCta">View GitHub Projects</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+
+            <a href="#contact" class="px-4 py-2.5 text-sm font-medium text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-lg transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span data-i18n="heroSecondaryCta">Get in Touch</span>
+            </a>
+
+            <button onclick="openCvModal()" class="px-4 py-2.5 text-sm font-medium text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-lg transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span data-i18n="heroResumeCta">View CV Summary</span>
+            </button>
+
+            <button onclick="copyEmail(this)" class="px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-white bg-slate-950/80 hover:bg-slate-900 border border-slate-800 rounded-lg transition-colors flex items-center gap-2 font-mono text-xs">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+              <span>jolanta.lodziana@gmail.com</span>
+            </button>
+          </div>
+
+          <!-- 3-Pillar Metrics Strip -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800/80">
+            <div class="p-3.5 rounded-lg bg-[#0F1422] border border-slate-800/80 space-y-1">
+              <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">C# · .NET</div>
+              <div class="text-xs font-semibold text-sky-400" data-i18n="metric1Title">Core Focus</div>
+              <div class="text-[11px] text-slate-400 leading-snug" data-i18n="metric1Desc">WPF desktop GUIs, XAML templating, and OOP design patterns</div>
+            </div>
+            <div class="p-3.5 rounded-lg bg-[#0F1422] border border-slate-800/80 space-y-1">
+              <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">MS SQL Server</div>
+              <div class="text-xs font-semibold text-sky-400" data-i18n="metric2Title">Database Systems</div>
+              <div class="text-[11px] text-slate-400 leading-snug" data-i18n="metric2Desc">Relational schemas, many-to-many joins & parameterized queries</div>
+            </div>
+            <div class="p-3.5 rounded-lg bg-[#0F1422] border border-slate-800/80 space-y-1">
+              <div class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">EN (C1) · DE (B2)</div>
+              <div class="text-xs font-semibold text-sky-400" data-i18n="metric3Title">Languages</div>
+              <div class="text-[11px] text-slate-400 leading-snug" data-i18n="metric3Desc">Fluent communication for Austrian and international engineering teams</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Section -->
+      <section id="projects" class="py-16 sm:py-24 border-b border-slate-800/60 bg-[#090D16]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
+          <div class="space-y-2 max-w-2xl">
+            <div class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold" data-i18n="projectsKicker">Software Repositories</div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white" data-i18n="projectsTitle">Featured Projects</h2>
+            <p class="text-sm text-slate-400 leading-relaxed" data-i18n="projectsSubtitle">
+              Two focused implementations demonstrating enterprise desktop database operations and clean object-oriented systems on GitHub.
+            </p>
+          </div>
+
+          <!-- 2 Compact Project Cards -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Project 1: WPF Zoo Manager -->
+            <div class="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#0E1322] hover:border-slate-700/80 transition-all p-6 space-y-6">
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+                  <svg class="w-3.5 h-3.5 text-sky-400" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                  <span data-i18n="p1Category">Desktop CRUD Application</span>
+                  <span class="text-slate-600">·</span>
+                  <span class="text-slate-500">C# · .NET · WPF · MS SQL</span>
+                </div>
+
+                <div>
+                  <h3 class="text-xl font-bold text-white tracking-tight hover:text-sky-400 transition-colors">WPF Zoo Manager</h3>
+                  <p class="text-sm text-slate-300 pt-1.5 leading-relaxed" data-i18n="p1Tagline">
+                    Custom-styled desktop CRUD application built with WPF (.NET) and MS SQL Server for managing zoos, animals, and their associations.
+                  </p>
+                </div>
+
+                <div class="space-y-1.5 pt-1">
+                  <div class="text-[11px] uppercase tracking-wider font-mono text-slate-400 font-semibold" data-i18n="archHeading">Key Architecture Highlights</div>
+                  <ul class="space-y-1.5 text-xs text-slate-300">
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p1f1"><strong>Complete CRUD Operations:</strong> Real-time Create, Read, Update, Delete for Zoos and Animals.</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p1f2"><strong>Relational Database:</strong> Connects to MS SQL Server via Microsoft.Data.SqlClient (ADO.NET).</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p1f3"><strong>Many-to-Many Associations:</strong> Dynamic junction table queries using SQL INNER JOINs.</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p1f4"><strong>SQL Injection Protection:</strong> Enforces parameterized queries across all commands.</span></li>
+                  </ul>
+                </div>
+
+                <div class="pt-2 flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">C#</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">.NET</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">WPF</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">XAML</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">MS SQL Server</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">ADO.NET</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">SqlClient</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JolantaLodziana/WPF-Zoo-Manager" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                  <span data-i18n="btnViewGithub">View on GitHub</span>
+                  <svg class="w-3 h-3 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+                <button onclick="openProjectModal('wpf')" class="py-2 px-3 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  <span data-i18n="btnViewDetails">Readme & Architecture</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Project 2: Console RPG -->
+            <div class="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#0E1322] hover:border-slate-700/80 transition-all p-6 space-y-6">
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+                  <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                  <span data-i18n="p2Category">Console Game & OOP Architecture</span>
+                  <span class="text-slate-600">·</span>
+                  <span class="text-slate-500">C# · .NET Core · OOP</span>
+                </div>
+
+                <div>
+                  <h3 class="text-xl font-bold text-white tracking-tight hover:text-sky-400 transition-colors">Object-Oriented Console RPG</h3>
+                  <p class="text-sm text-slate-300 pt-1.5 leading-relaxed" data-i18n="p2Tagline">
+                    An object-oriented console RPG game written in C# featuring class selection, mana/cooldown mechanics, inventory, and combat logs.
+                  </p>
+                </div>
+
+                <div class="space-y-1.5 pt-1">
+                  <div class="text-[11px] uppercase tracking-wider font-mono text-slate-400 font-semibold" data-i18n="archHeading">Key Architecture Highlights</div>
+                  <ul class="space-y-1.5 text-xs text-slate-300">
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p2f1"><strong>OOP Design:</strong> Custom classes for Heroes (Mage, Warrior) and Enemies (Dragon).</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p2f2"><strong>Dynamic Combat System:</strong> Formula-based damage, mana usage, spell cooldowns, logs.</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p2f3"><strong>UI & Visuals:</strong> Color-coded Health/Mana bars and ASCII console formatting.</span></li>
+                    <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span><span data-i18n="p2f4"><strong>Resource Management:</strong> Cooldown timers, inventory potion usage, and state loop.</span></li>
+                  </ul>
+                </div>
+
+                <div class="pt-2 flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-400">
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">C#</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">.NET Core</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">OOP</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">Inheritance</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">Clean Code</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">Generics</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JolantaLodziana/CSharp-Console-RPG" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                  <span data-i18n="btnViewGithub">View on GitHub</span>
+                  <svg class="w-3 h-3 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+                <button onclick="openProjectModal('console')" class="py-2 px-3 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  <span data-i18n="btnViewDetails">Readme & Architecture</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Skills & Spoken Languages -->
+      <section id="skills" class="py-16 sm:py-24 border-b border-slate-800/60 bg-[#070A12]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
+          <div class="space-y-2 max-w-2xl">
+            <div class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold" data-i18n="skillsKicker">Core Competencies & Tooling</div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white" data-i18n="skillsTitle">Technical Skills & Tooling</h2>
+            <p class="text-sm text-slate-400 leading-relaxed" data-i18n="skillsSubtitle">Practical foundation built through extensive self-study, certified training, and hands-on coding.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Programming Languages -->
+            <div class="rounded-xl border border-slate-800 bg-[#0D1220] p-6 space-y-5">
+              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-800">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                <h3 class="text-base font-bold text-white tracking-tight" data-i18n="catLanguages">Programming Languages</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">C#</span><span class="text-[11px] font-mono text-slate-400" data-i18n="lvlPrimary">Primary Language</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Core OOP, LINQ, Generics, Clean Code, Async/Await</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">SQL</span><span class="text-[11px] font-mono text-slate-400" data-i18n="lvlDbQueries">Database Queries</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Relational queries, Joins, Parameterized commands, DDL/DML</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">HTML & CSS</span><span class="text-[11px] font-mono text-slate-400">Web Basics</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Semantic layout, styling basics</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">JavaScript</span><span class="text-[11px] font-mono text-slate-400">Foundational</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Client-side scripting, DOM manipulation</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">PHP · C/C++ · Java</span><span class="text-[11px] font-mono text-slate-400">Foundational</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Procedural structure, JVM basics, memory concepts</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Frameworks & Technologies -->
+            <div class="rounded-xl border border-slate-800 bg-[#0D1220] p-6 space-y-5">
+              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-800">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <h3 class="text-base font-bold text-white tracking-tight" data-i18n="catFrameworks">Frameworks & Technologies</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">.NET Platform</span><span class="text-[11px] font-mono text-slate-400">Core Ecosystem</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Runtime, standard libraries, app lifecycle</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">WPF & XAML</span><span class="text-[11px] font-mono text-slate-400">Desktop GUI</span></div>
+                  <p class="text-xs text-slate-400 pt-1">ControlTemplates, Triggers, Custom Styles, Data Binding</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">ADO.NET / SqlClient</span><span class="text-[11px] font-mono text-slate-400">Data Access</span></div>
+                  <p class="text-xs text-slate-400 pt-1">SqlDataAdapter, DataTable, Parameterized SqlCommand</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">OOP & Clean Code</span><span class="text-[11px] font-mono text-slate-400">Software Design</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Inheritance, Encapsulation, Polymorphism, Abstraction</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">CRUD Systems</span><span class="text-[11px] font-mono text-slate-400">System Design</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Transactional operations, duplicate validation, error handling</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Databases & Tools -->
+            <div class="rounded-xl border border-slate-800 bg-[#0D1220] p-6 space-y-5">
+              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-800">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                <h3 class="text-base font-bold text-white tracking-tight" data-i18n="catTools">Databases & Developer Tools</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">MS SQL Server</span><span class="text-[11px] font-mono text-slate-400">RDBMS</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Table design, foreign keys, query execution, indexing</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-900/90 border-sky-500/30">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-sky-300">JetBrains Rider</span><span class="text-[11px] font-mono text-slate-400">Primary IDE</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Code analysis, refactoring, debugging, project management</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">LocalDB & Express</span><span class="text-[11px] font-mono text-slate-400">Development DB</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Local database testing for rapid desktop iterations</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">Database Explorer</span><span class="text-[11px] font-mono text-slate-400">DB Tooling</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Schema inspection, table updates, query execution</p>
+                </div>
+                <div class="p-3 rounded-lg border bg-slate-950/60 border-slate-800/80">
+                  <div class="flex justify-between items-center"><span class="text-sm font-semibold text-slate-200">Git & GitHub</span><span class="text-[11px] font-mono text-slate-400">Version Control</span></div>
+                  <p class="text-xs text-slate-400 pt-1">Branching, commits, pull requests, repository hygiene</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spoken Languages Row -->
+          <div class="rounded-xl border border-slate-800 bg-[#0E1424] p-6 space-y-4">
+            <div class="flex items-center gap-2 text-white">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+              <h3 class="text-base font-bold tracking-tight" data-i18n="spokenLangsTitle">Spoken Languages</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-3.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="flex items-center justify-between text-sm"><span class="font-semibold text-slate-100">Polish</span><span class="text-xs font-mono text-sky-400 font-medium">Native / Erstsprache</span></div>
+                <div class="text-xs text-slate-400">Mother tongue</div>
+              </div>
+              <div class="p-3.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="flex items-center justify-between text-sm"><span class="font-semibold text-slate-100">English</span><span class="text-xs font-mono text-sky-400 font-medium">C1 Certified</span></div>
+                <div class="text-xs text-slate-400">Fluent technical & business communication (BEST Institut Wien)</div>
+              </div>
+              <div class="p-3.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="flex items-center justify-between text-sm"><span class="font-semibold text-slate-100">German</span><span class="text-xs font-mono text-sky-400 font-medium">B2 Certified</span></div>
+                <div class="text-xs text-slate-400">Professional workplace proficiency in Vienna (ZIB Training Wien)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chronological Journey & Education -->
+      <section id="timeline" class="py-16 sm:py-24 border-b border-slate-800/60 bg-[#090D16]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div class="space-y-2">
+              <div class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold" data-i18n="journeyKicker">Professional & Educational Journey</div>
+              <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white" data-i18n="journeyTitle">Experience & Courses</h2>
+              <p class="text-sm text-slate-400 leading-relaxed" data-i18n="journeySubtitle">Continuous commitment to engineering excellence, technical training, and professional discipline.</p>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="flex items-center p-1 bg-slate-900 border border-slate-800 rounded-lg shrink-0 text-xs">
+              <button onclick="filterTimeline('all', this)" class="px-3 py-1.5 rounded-md font-medium transition-colors bg-sky-500 text-slate-950 font-bold" data-i18n="filterAll">All</button>
+              <button onclick="filterTimeline('experience', this)" class="px-3 py-1.5 rounded-md font-medium transition-colors text-slate-400 hover:text-slate-200" data-i18n="filterExp">Practical & IT</button>
+              <button onclick="filterTimeline('education', this)" class="px-3 py-1.5 rounded-md font-medium transition-colors text-slate-400 hover:text-slate-200" data-i18n="filterEdu">Courses & Education</button>
+            </div>
+          </div>
+
+          <!-- Timeline items -->
+          <div id="timeline-container" class="relative border-l border-slate-800 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-8">
+            <!-- 1. Self Study -->
+            <div class="timeline-item relative group" data-type="experience">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">2018 – Present</span>
+                  <span class="text-slate-400">Vienna & Krakow</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight" data-i18n="tlSelfStudyRole">IT Knowledge & Autonomous Software Development</h3>
+                  <div class="text-xs text-slate-400 font-medium" data-i18n="tlSelfStudyInst">Self-Directed Engineering</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlSelfStudyDesc">
+                  Systematic development of software engineering skills, building independent desktop and console applications in C# and SQL, and continuous mastery of .NET tooling.
+                </p>
+                <ul class="space-y-1.5 pt-1 text-xs text-slate-300">
+                  <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-sky-400 shrink-0 mt-2"></span><span data-i18n="tlSelfStudyB1">Autonomous learning of C#, object-oriented architecture, and modern desktop frameworks.</span></li>
+                  <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-sky-400 shrink-0 mt-2"></span><span data-i18n="tlSelfStudyB2">Implementation of software projects with C#, WPF, XAML, and MS SQL Server.</span></li>
+                  <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-sky-400 shrink-0 mt-2"></span><span data-i18n="tlSelfStudyB3">Hands-on utilization of professional development environments including JetBrains Rider and Database Explorer.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 2. Udemy C# Masterclass -->
+            <div class="timeline-item relative group" data-type="education">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">03/2025 – Ongoing</span>
+                  <span class="text-slate-400">Online Coursework</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight">Complete C# Masterclass</h3>
+                  <div class="text-xs text-slate-400 font-medium">Udemy</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlUdemyDesc">
+                  Comprehensive mastery of C# programming from fundamentals to advanced enterprise concepts: .NET, OOP, Clean Code, LINQ, WPF, Generics, and Unit Testing.
+                </p>
+              </div>
+            </div>
+
+            <!-- 3. futurefactory -->
+            <div class="timeline-item relative group" data-type="education">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">03/2026 – Ongoing</span>
+                  <span class="text-slate-400">Vienna, Austria</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight">#futurefactory („Stärken erkennen. Chancen nutzen“)</h3>
+                  <div class="text-xs text-slate-400 font-medium">JaW & ABZ* Austria, Wien</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlFuturefactoryDesc">
+                  Professional qualification and strategic career development program focused on career entry into the Austrian technology and engineering sector.
+                </p>
+              </div>
+            </div>
+
+            <!-- 4. English C1 & German B2 -->
+            <div class="timeline-item relative group" data-type="education">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">2025 – 2026</span>
+                  <span class="text-slate-400">Vienna, Austria</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight" data-i18n="tlLangsRole">English Course (C1) & German Course (B2)</h3>
+                  <div class="text-xs text-slate-400 font-medium">BEST Institut & ZIB Training, Wien</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlLangsDesc">
+                  Certified C1 English proficiency for international development teams and B2 business German qualification for workplace operations in Austria.
+                </p>
+              </div>
+            </div>
+
+            <!-- 5. LuxSound -->
+            <div class="timeline-item relative group" data-type="experience">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">02/2020 – 03/2022</span>
+                  <span class="text-slate-400">Krakow, Poland</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight" data-i18n="tlLuxSoundRole">Sound & Lighting Technician</h3>
+                  <div class="text-xs text-slate-400 font-medium">LuxSound - Licht & Tontechnik</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlLuxSoundDesc">
+                  Technical event engineering for large-scale concerts and festivals with audiences of up to 3,000 attendees.
+                </p>
+                <ul class="space-y-1.5 pt-1 text-xs text-slate-300">
+                  <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-sky-400 shrink-0 mt-2"></span><span data-i18n="tlLuxSoundB1">Stage assembly, electrical wiring, audio routing, and system configuration under tight deadlines.</span></li>
+                  <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-sky-400 shrink-0 mt-2"></span><span data-i18n="tlLuxSoundB2">Live soundchecks and high-stakes signal troubleshooting in mission-critical environments.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 6. Secondary Education -->
+            <div class="timeline-item relative group" data-type="education">
+              <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-[#0D1220] border border-slate-700 flex items-center justify-center text-slate-400 group-hover:border-sky-400 group-hover:text-sky-300 transition-colors shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path></svg>
+              </div>
+              <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-5 space-y-2.5 transition-all group-hover:border-slate-700">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span class="text-sky-400 font-semibold">2017 – 2022</span>
+                  <span class="text-slate-400">Krakow, Poland</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-white tracking-tight" data-i18n="tlMaturaRole">Secondary Technical & General Education – Matura</h3>
+                  <div class="text-xs text-slate-400 font-medium">Liceum Ogólnokształcące „Cosinus“ & HTL-Technikum Nr 7</div>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" data-i18n="tlMaturaDesc">
+                  Successful completion of secondary education (Matura) and technical foundation coursework in electronics and electrical engineering.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Direct Contact Section -->
+      <section id="contact" class="py-16 sm:py-24 border-b border-slate-800/60 bg-[#070A11]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
+          <div class="space-y-2 text-center max-w-xl mx-auto">
+            <div class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold" data-i18n="contactKicker">Direct Communication</div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white" data-i18n="contactTitle">Get In Touch</h2>
+            <p class="text-sm text-slate-400 leading-relaxed" data-i18n="contactSubtitle">
+              Currently available in Vienna, Austria for Junior Software Engineer positions, IT Traineeships, or Developer Internships.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-slate-800 bg-[#0E1322] p-6 sm:p-8 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="space-y-1">
+                  <div class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                    <span data-i18n="contactLocLabel">Location</span>
+                  </div>
+                  <div class="text-sm font-semibold text-slate-200" data-i18n="contactLocVal">
+                    Vienna, Austria (Open to local & hybrid/remote roles)
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <div class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span data-i18n="contactStatusLabel">Work Authorization</span>
+                  </div>
+                  <div class="text-sm font-semibold text-slate-200" data-i18n="contactStatusVal">
+                    Immediate availability · Full work rights in Austria / EU
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="space-y-1">
+                  <div class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span data-i18n="contactEmailLabel">Direct Email</span>
+                  </div>
+                  <div class="text-sm sm:text-base font-mono font-bold text-sky-400">
+                    jolanta.lodziana@gmail.com
+                  </div>
+                </div>
+
+                <div class="text-xs text-slate-400 leading-relaxed" data-i18n="contactNote">
+                  Feel free to reach out directly regarding junior developer openings, traineeships, or technical interviews in Vienna or remotely.
+                </div>
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-800">
+              <a href="mailto:jolanta.lodziana@gmail.com?subject=Junior%20Software%20Engineer%20Opportunity%20(C%23%20/%20.NET%20/%20SQL)" class="px-5 py-2.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs sm:text-sm rounded-lg transition-all shadow-sm flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                <span data-i18n="btnSendEmail">Send Message via Email</span>
+              </a>
+
+              <button onclick="copyEmail(this)" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-white rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                <span data-i18n="btnCopyEmail">Copy Email Address</span>
+              </button>
+
+              <button onclick="openCvModal()" class="px-4 py-2.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-300 hover:text-white rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span data-i18n="btnOpenCv">Open CV Overview</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-800 bg-[#06080E] text-slate-400 text-xs">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1 text-center md:text-left">
+            <div class="font-bold text-sm text-white tracking-tight flex items-center justify-center md:justify-start gap-2">
+              <span class="w-2 h-2 rounded-sm bg-sky-400"></span>
+              <span>Jolanta Łodziana</span>
+              <span class="text-slate-500 font-normal">· Junior Software Engineer (C#, .NET, SQL)</span>
+            </div>
+            <div class="flex items-center justify-center md:justify-start gap-2 text-slate-500 font-mono text-[11px]">
+              <span>Vienna, Austria</span>
+              <span>·</span>
+              <span>jolanta.lodziana@gmail.com</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-6 font-medium text-slate-300">
+            <a href="#projects" class="hover:text-sky-400 transition-colors" data-i18n="navProjects">Projects</a>
+            <a href="#skills" class="hover:text-sky-400 transition-colors" data-i18n="navSkills">Skills & Tools</a>
+            <a href="#timeline" class="hover:text-sky-400 transition-colors" data-i18n="navTimeline">Experience & Courses</a>
+            <a href="#contact" class="hover:text-sky-400 transition-colors" data-i18n="navContact">Contact</a>
+            <button onclick="openCvModal()" class="hover:text-sky-400 transition-colors" data-i18n="navResume">CV Summary</button>
+          </div>
+
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white transition-colors">
+            <span>Top</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          </button>
+        </div>
+
+        <div class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© <span id="year"></span> · Jolanta Łodziana · C# & .NET Developer Portfolio</div>
+          <div class="flex items-center gap-2">
+            <span>Language / Sprache:</span>
+            <button onclick="setLanguage('en')" class="hover:underline text-sky-400 font-semibold">English</button>
+            <span>·</span>
+            <button onclick="setLanguage('de')" class="hover:underline">Deutsch</button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
+      <div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl border border-slate-700 bg-[#0D121F] shadow-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <div id="modal-category" class="text-xs font-mono text-sky-400 mb-1"></div>
+            <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight"></h3>
+            <p id="modal-tagline" class="text-sm text-slate-300 pt-1"></p>
+          </div>
+          <button onclick="closeProjectModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs uppercase font-mono text-slate-400 tracking-wider" data-i18n="modalOverview">Project Overview</h4>
+          <p id="modal-description" class="text-sm text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-xs uppercase font-mono text-slate-400 tracking-wider" data-i18n="modalFeatures">Key Features & Engineering Highlights</h4>
+          <ul id="modal-features-list" class="space-y-2.5 text-xs sm:text-sm text-slate-300"></ul>
+        </div>
+
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <h4 class="text-xs uppercase font-mono text-slate-400 tracking-wider" data-i18n="modalTech">Tech Stack & Libraries</h4>
+          <div id="modal-tech-list" class="flex flex-wrap gap-2 text-xs font-mono"></div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+          <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs sm:text-sm transition-colors shadow-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+            <span data-i18n="modalOpenGithub">Open Repository on GitHub</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+          <button onclick="closeProjectModal()" class="px-4 py-2 text-xs sm:text-sm text-slate-400 hover:text-slate-200 transition-colors" data-i18n="modalClose">Close Window</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CV Resume Modal (Printable) -->
+    <div id="cv-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+      <div id="cv-modal-content" class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl border border-slate-700 bg-[#0E1322] shadow-2xl p-6 sm:p-10 space-y-8">
+        <div class="flex items-start justify-between gap-4 pb-6 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Jolanta Łodziana</h2>
+            <div class="text-sm font-semibold text-sky-400 pt-1">Junior Software Engineer (C#, .NET, SQL)</div>
+            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400 pt-2 font-mono">
+              <span>Vienna, Austria</span>
+              <span>·</span>
+              <span>jolanta.lodziana@gmail.com</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 no-print">
+            <button onclick="window.print()" class="px-3.5 py-1.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+              <span data-i18n="cvPrint">Print / Save as PDF</span>
+            </button>
+            <button onclick="closeCvModal()" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-xs uppercase font-mono tracking-wider text-slate-400 font-semibold" data-i18n="cvProfileTitle">Professional Profile</h3>
+          <p class="text-sm text-slate-300 leading-relaxed" data-i18n="cvProfileText">
+            Passionate software developer with solid competencies in C#, .NET, WPF, XAML, and MS SQL Server. Dedicated self-starter with continuous practical experience developing desktop CRUD applications, clean OOP architectures, and parameterized database queries.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-xs uppercase font-mono tracking-wider text-slate-400 font-semibold" data-i18n="cvProjectsTitle">Key Projects on GitHub</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg border border-slate-800 bg-slate-950/60 space-y-2">
+              <div class="font-bold text-sm text-white flex justify-between"><span>WPF Zoo Manager</span><span class="text-[10px] text-slate-500 font-mono">GitHub</span></div>
+              <div class="text-xs font-mono text-sky-400">C# · .NET · WPF · MS SQL</div>
+              <p class="text-xs text-slate-300 leading-relaxed" data-i18n="p1Tagline">Custom-styled desktop CRUD application built with WPF (.NET) and MS SQL Server for managing zoos, animals, and associations.</p>
+              <ul class="text-[11px] text-slate-400 space-y-1 pt-1">
+                <li>· Complete CRUD for Zoos & Animals</li>
+                <li>· ADO.NET SqlClient & Parameterized Queries</li>
+                <li>· Many-to-Many INNER JOIN Relationships</li>
+                <li>· Custom Borderless XAML Window & DragMove</li>
+              </ul>
+            </div>
+            <div class="p-4 rounded-lg border border-slate-800 bg-slate-950/60 space-y-2">
+              <div class="font-bold text-sm text-white flex justify-between"><span>Object-Oriented Console RPG</span><span class="text-[10px] text-slate-500 font-mono">GitHub</span></div>
+              <div class="text-xs font-mono text-sky-400">C# · .NET Core · OOP</div>
+              <p class="text-xs text-slate-300 leading-relaxed" data-i18n="p2Tagline">An object-oriented console RPG game written in C# featuring class selection, mana/cooldown mechanics, inventory, and combat logs.</p>
+              <ul class="text-[11px] text-slate-400 space-y-1 pt-1">
+                <li>· Custom OOP Class Hierarchy (Mage, Warrior vs Dragon)</li>
+                <li>· Dynamic Formula Damage & Spell Cooldowns</li>
+                <li>· Color-coded Health/Mana bars & ASCII CLI formatting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-xs uppercase font-mono tracking-wider text-slate-400 font-semibold" data-i18n="cvEduTitle">Education & Continuous Training</h3>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">IT Knowledge & Autonomous Software Development</span><span class="text-slate-400"> · Self-Study (C#, WPF, SQL)</span></div>
+              <div class="text-[11px] font-mono text-sky-400">2018 – Present</div>
+            </div>
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">Complete C# Masterclass</span><span class="text-slate-400"> · Udemy</span></div>
+              <div class="text-[11px] font-mono text-sky-400">03/2025 – Ongoing</div>
+            </div>
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">#futurefactory</span><span class="text-slate-400"> · JaW & ABZ* Austria, Wien</span></div>
+              <div class="text-[11px] font-mono text-sky-400">03/2026 – Ongoing</div>
+            </div>
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">English C1 & German B2 Courses</span><span class="text-slate-400"> · BEST Institut & ZIB Training, Wien</span></div>
+              <div class="text-[11px] font-mono text-sky-400">2025 – 2026</div>
+            </div>
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">Sound & Lighting Technician</span><span class="text-slate-400"> · LuxSound, Krakow</span></div>
+              <div class="text-[11px] font-mono text-sky-400">02/2020 – 03/2022</div>
+            </div>
+            <div class="p-3 rounded-lg border border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div><span class="font-bold text-slate-200">Secondary Education – Matura</span><span class="text-slate-400"> · Cosinus & HTL-Technikum Nr 7, Krakow</span></div>
+              <div class="text-[11px] font-mono text-sky-400">2017 – 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <h3 class="text-xs uppercase font-mono tracking-wider text-slate-400 font-semibold">Languages</h3>
+          <div class="flex flex-wrap gap-4 text-xs font-mono text-slate-300">
+            <span>Polish: Native / Erstsprache</span>
+            <span>·</span>
+            <span>English: C1 Certified</span>
+            <span>·</span>
+            <span>German: B2 Certified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Scripts: Localization, Modals & Timeline Filtering -->
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      let currentLang = 'en';
+
+      const projectData = {
+        wpf: {
+          en: {
+            title: 'WPF Zoo Manager',
+            category: 'Desktop CRUD Application · C# / .NET / MS SQL Server',
+            tagline: 'Custom-styled desktop CRUD application built with WPF (.NET) and MS SQL Server for managing zoos, animals, and their associations.',
+            description: 'A production-grade desktop CRUD application managing zoos, animal registries, and their associations with real-time relational synchronization and custom XAML aesthetics.',
+            features: [
+              'Complete CRUD Operations: Create, Read, Update, and Delete records for both Zoos and Animals in real time.',
+              'Relational Database Integration: Connects to Microsoft SQL Server via Microsoft.Data.SqlClient (ADO.NET).',
+              'Many-to-Many Relationships: Handles dynamic associations between Zoos and Animals using SQL INNER JOIN queries.',
+              'SQL Injection Protection: Employs parameterized queries (SqlCommand.Parameters) across all database operations.',
+              'Input Validation & Safety: Checks for duplicate entry records before inserting into the database.',
+              'Borderless Window: Implemented a custom TitleBar supporting window dragging (DragMove) and custom close triggers.',
+              'Control Templates & Triggers: Custom-styled buttons with interactive hover/click animations (TranslateTransform) and drop shadows.',
+              'Custom Scrollbars & Theming: Fully redesigned WPF ScrollBar templates matching the theme with linear gradients and solid brushes.'
+            ],
+            tech: ['C#', '.NET', 'WPF', 'XAML', 'MS SQL Server', 'ADO.NET / SqlClient', 'DataTables', 'DataAdapters'],
+            github: 'https://github.com/JolantaLodziana/WPF-Zoo-Manager'
+          },
+          de: {
+            title: 'WPF Zoo Manager',
+            category: 'Desktop-CRUD-Anwendung · C# / .NET / MS SQL Server',
+            tagline: 'Desktop-CRUD-Anwendung mit WPF (.NET) und MS SQL Server zur Verwaltung von Zoos, Tieren und deren relationalen Verknüpfungen.',
+            description: 'Eine Desktop-CRUD-Anwendung mit individuellem XAML-Design zur Echtzeitverwaltung von Zoos, Tierbeständen und deren n:m-Zuordnungen über ADO.NET.',
+            features: [
+              'Vollständige CRUD-Operationen: Erstellen, Lesen, Aktualisieren und Löschen von Datensätzen für Zoos und Tiere in Echtzeit.',
+              'Relationale Datenbankanbindung: Direkte Anbindung an Microsoft SQL Server über Microsoft.Data.SqlClient (ADO.NET).',
+              'Many-to-Many-Beziehungen (n:m): Dynamische Verknüpfung von Zoos und Tieren über Zwischentabellen und relationale SQL INNER JOINs.',
+              'Schutz vor SQL-Injection: Konsequente Verwendung parametrisierter Abfragen (SqlCommand.Parameters) bei sämtlichen Operationen.',
+              'Eingabevalidierung & Datensicherheit: Überprüfung auf Duplikate vor dem Speichern in die Datenbank.',
+              'Rahmenloses XAML-Fenster (Borderless): Eigene TitleBar mit Unterstützung für DragMove und benutzerdefinierte Schließ-Trigger.',
+              'ControlTemplates & Trigger: Eigene Button-Styles mit TranslateTransform-Animationen bei Hover/Klick und DropShadows.',
+              'Benutzerdefinierte Scrollbars & Theming: Neu gestaltete WPF-ScrollBar-Vorlagen mit LinearGradients und SolidBrushes.'
+            ],
+            tech: ['C#', '.NET', 'WPF', 'XAML', 'MS SQL Server', 'ADO.NET / SqlClient', 'DataTables', 'DataAdapters'],
+            github: 'https://github.com/JolantaLodziana/WPF-Zoo-Manager'
+          }
+        },
+        console: {
+          en: {
+            title: 'Object-Oriented Console RPG',
+            category: 'Console Game & OOP Architecture · C# / .NET Core',
+            tagline: 'An object-oriented console RPG game written in C# featuring class selection, mana/cooldown mechanics, inventory, and combat logs.',
+            description: 'A modular, object-oriented console role-playing game written in C# demonstrating strong OOP design, clean domain models, and dynamic combat mechanics.',
+            features: [
+              'OOP Design: Custom inheritance hierarchy with classes for Heroes (Mage, Warrior) and Enemies (Dragon).',
+              'Dynamic Combat System: Formula-based damage calculation, mana usage, spell cooldown timers, and active turn logs.',
+              'UI & Visuals: Color-coded Health/Mana bars and structured ASCII console formatting for optimal CLI readability.',
+              'Resource Management: Real-time spell cooldown decrementing, mana pool depletion, and inventory potion consumption.',
+              'Clean Architecture: Clear separation between character stats, game state machine, and console rendering.'
+            ],
+            tech: ['C#', '.NET Core', 'OOP', 'Inheritance & Polymorphism', 'Clean Code', 'Generics', 'Console Formatting'],
+            github: 'https://github.com/JolantaLodziana/CSharp-Console-RPG'
+          },
+          de: {
+            title: 'Objektorientiertes Konsolen-RPG',
+            category: 'Konsolen-Spiel & OOP-Architektur · C# / .NET Core',
+            tagline: 'Ein objektorientiertes Konsolen-Rollenspiel in C# mit Klassenauswahl, Mana-/Cooldown-Mechaniken, Inventar und Kampfprotokollen.',
+            description: 'Ein modulares, objektorientiertes Konsolen-Rollenspiel in C#, das saubere Vererbung, Zustandslogik und dynamische Schadensberechnung demonstriert.',
+            features: [
+              'OOP-Design: Eigene Vererbungshierarchie mit Klassen für Helden (Magier, Krieger) und Gegner (Drache).',
+              'Dynamisches Kampfsystem: Formelbasierte Schadensberechnung, Mana-Verbrauch, Zauber-Abklingzeiten und Aktions-Logs.',
+              'UI & Visuals: Farbcodierte Lebens- und Mana-Balken sowie strukturierte ASCII-Konsolenformatierung für optimale Lesbarkeit.',
+              'Ressourcen-Management: Echtzeit-Aktualisierung von Cooldowns, Mana-Pools und Inventar-Heiltränken.',
+              'Saubere Architektur: Klare Trennung von Charakterwerten, Spielzustandsmaschine und Konsolen-Rendering.'
+            ],
+            tech: ['C#', '.NET Core', 'OOP', 'Vererbung & Polymorphie', 'Clean Code', 'Generics', 'Konsolen-Formatierung'],
+            github: 'https://github.com/JolantaLodziana/CSharp-Console-RPG'
+          }
+        }
+      };
+
+      const i18nDict = {
+        en: {
+          navProjects: 'Projects',
+          navSkills: 'Skills & Tools',
+          navTimeline: 'Experience & Courses',
+          navContact: 'Contact',
+          navResume: 'CV Summary',
+          heroRoles: 'Junior Developer · Trainee · IT Internship',
+          heroRole: 'Junior Software Engineer (C#, .NET, SQL)',
+          heroHeadline: 'Building robust desktop applications & clean relational database systems.',
+          heroSummary: 'Passionate software developer with solid competencies in C#, .NET, WPF, XAML, and MS SQL Server. Dedicated self-starter with continuous practical experience developing desktop CRUD applications, clean OOP architectures, and parameterized database queries.',
+          heroPrimaryCta: 'View GitHub Projects',
+          heroSecondaryCta: 'Get in Touch',
+          heroResumeCta: 'View CV Summary',
+          metric1Title: 'Core Focus',
+          metric1Desc: 'WPF desktop GUIs, XAML templating, and OOP design patterns',
+          metric2Title: 'Database Systems',
+          metric2Desc: 'Relational schemas, many-to-many joins & parameterized queries',
+          metric3Title: 'Languages',
+          metric3Desc: 'Fluent communication for Austrian and international engineering teams',
+          projectsKicker: 'Software Repositories',
+          projectsTitle: 'Featured Projects',
+          projectsSubtitle: 'Two focused implementations demonstrating enterprise desktop database operations and clean object-oriented systems on GitHub.',
+          archHeading: 'Key Architecture Highlights',
+          btnViewGithub: 'View on GitHub',
+          btnViewDetails: 'Readme & Architecture',
+          p1Category: 'Desktop CRUD Application',
+          p1Tagline: 'Custom-styled desktop CRUD application built with WPF (.NET) and MS SQL Server for managing zoos, animals, and their associations.',
+          p1f1: '<strong>Complete CRUD Operations:</strong> Real-time Create, Read, Update, Delete for Zoos and Animals.',
+          p1f2: '<strong>Relational Database:</strong> Connects to MS SQL Server via Microsoft.Data.SqlClient (ADO.NET).',
+          p1f3: '<strong>Many-to-Many Associations:</strong> Dynamic junction table queries using SQL INNER JOINs.',
+          p1f4: '<strong>SQL Injection Protection:</strong> Enforces parameterized queries across all commands.',
+          p2Category: 'Console Game & OOP Architecture',
+          p2Tagline: 'An object-oriented console RPG game written in C# featuring class selection, mana/cooldown mechanics, inventory, and combat logs.',
+          p2f1: '<strong>OOP Design:</strong> Custom classes for Heroes (Mage, Warrior) and Enemies (Dragon).',
+          p2f2: '<strong>Dynamic Combat System:</strong> Formula-based damage, mana usage, spell cooldowns, logs.',
+          p2f3: '<strong>UI & Visuals:</strong> Color-coded Health/Mana bars and ASCII console formatting.',
+          p2f4: '<strong>Resource Management:</strong> Cooldown timers, inventory potion usage, and state loop.',
+          skillsKicker: 'Core Competencies & Tooling',
+          skillsTitle: 'Technical Skills & Tooling',
+          skillsSubtitle: 'Practical foundation built through extensive self-study, certified training, and hands-on coding.',
+          catLanguages: 'Programming Languages',
+          catFrameworks: 'Frameworks & Technologies',
+          catTools: 'Databases & Developer Tools',
+          lvlPrimary: 'Primary Language',
+          lvlDbQueries: 'Database Queries',
+          spokenLangsTitle: 'Spoken Languages',
+          journeyKicker: 'Professional & Educational Journey',
+          journeyTitle: 'Experience & Courses',
+          journeySubtitle: 'Continuous commitment to engineering excellence, technical training, and professional discipline.',
+          filterAll: 'All',
+          filterExp: 'Practical & IT',
+          filterEdu: 'Courses & Education',
+          contactKicker: 'Direct Communication',
+          contactTitle: 'Get In Touch',
+          contactSubtitle: 'Currently available in Vienna, Austria for Junior Software Engineer positions, IT Traineeships, or Developer Internships.',
+          contactLocLabel: 'Location',
+          contactLocVal: 'Vienna, Austria (Open to local & hybrid/remote roles)',
+          contactStatusLabel: 'Work Authorization',
+          contactStatusVal: 'Immediate availability · Full work rights in Austria / EU',
+          contactEmailLabel: 'Direct Email',
+          contactNote: 'Feel free to reach out directly regarding junior developer openings, traineeships, or technical interviews in Vienna or remotely.',
+          btnSendEmail: 'Send Message via Email',
+          btnCopyEmail: 'Copy Email Address',
+          btnOpenCv: 'Open CV Overview',
+          modalOverview: 'Project Overview',
+          modalFeatures: 'Key Features & Engineering Highlights',
+          modalTech: 'Tech Stack & Libraries',
+          modalOpenGithub: 'Open Repository on GitHub',
+          modalClose: 'Close Window',
+          cvPrint: 'Print / Save as PDF',
+          cvProfileTitle: 'Professional Profile',
+          cvProfileText: 'Passionate software developer with solid competencies in C#, .NET, WPF, XAML, and MS SQL Server. Dedicated self-starter with continuous practical experience developing desktop CRUD applications, clean OOP architectures, and parameterized database queries.',
+          cvProjectsTitle: 'Key Projects on GitHub',
+          cvEduTitle: 'Education & Continuous Training',
+          tlSelfStudyRole: 'IT Knowledge & Autonomous Software Development',
+          tlSelfStudyInst: 'Self-Directed Engineering',
+          tlSelfStudyDesc: 'Systematic development of software engineering skills, building independent desktop and console applications in C# and SQL, and continuous mastery of .NET tooling.',
+          tlSelfStudyB1: 'Autonomous learning of C#, object-oriented architecture, and modern desktop frameworks.',
+          tlSelfStudyB2: 'Implementation of software projects with C#, WPF, XAML, and MS SQL Server.',
+          tlSelfStudyB3: 'Hands-on utilization of professional development environments including JetBrains Rider and Database Explorer.',
+          tlUdemyDesc: 'Comprehensive mastery of C# programming from fundamentals to advanced enterprise concepts: .NET, OOP, Clean Code, LINQ, WPF, Generics, and Unit Testing.',
+          tlFuturefactoryDesc: 'Professional qualification and strategic career development program focused on career entry into the Austrian technology and engineering sector.',
+          tlLangsRole: 'English Course (C1) & German Course (B2)',
+          tlLangsDesc: 'Certified C1 English proficiency for international development teams and B2 business German qualification for workplace operations in Austria.',
+          tlLuxSoundRole: 'Sound & Lighting Technician',
+          tlLuxSoundDesc: 'Technical event engineering for large-scale concerts and festivals with audiences of up to 3,000 attendees.',
+          tlLuxSoundB1: 'Stage assembly, electrical wiring, audio routing, and system configuration under tight deadlines.',
+          tlLuxSoundB2: 'Live soundchecks and high-stakes signal troubleshooting in mission-critical environments.',
+          tlMaturaRole: 'Secondary Technical & General Education – Matura',
+          tlMaturaDesc: 'Successful completion of secondary education (Matura) and technical foundation coursework in electronics and electrical engineering.'
+        },
+        de: {
+          navProjects: 'Projekte',
+          navSkills: 'Kenntnisse & Tools',
+          navTimeline: 'Erfahrung & Kurse',
+          navContact: 'Kontakt',
+          navResume: 'Lebenslauf-Übersicht',
+          heroRoles: 'Junior Developer · Trainee · IT-Praktikum',
+          heroRole: 'Junior Software Engineer (C#, .NET, SQL)',
+          heroHeadline: 'Entwicklung solider Desktop-Anwendungen & relationaler Datenbanksysteme.',
+          heroSummary: 'Motivierte Softwareentwicklerin mit fundierten Kenntnissen in C#, .NET, WPF, XAML und MS SQL Server. Hohe Eigeninitiative mit praktischer Erfahrung in der Entwicklung eigener Desktop-CRUD-Anwendungen, sauberer OOP-Architekturen und parametrisierter SQL-Abfragen.',
+          heroPrimaryCta: 'GitHub-Projekte ansehen',
+          heroSecondaryCta: 'Kontakt aufnehmen',
+          heroResumeCta: 'Lebenslauf-Vorschau',
+          metric1Title: 'Kernschwerpunkt',
+          metric1Desc: 'WPF-Desktop-Oberflächen, XAML-Templates und OOP-Entwurfsmuster',
+          metric2Title: 'Datenbanksysteme',
+          metric2Desc: 'Relationale Schemas, n:m-Beziehungen und parametrisierte Abfragen',
+          metric3Title: 'Sprachen',
+          metric3Desc: 'Sichere Kommunikation für österreichische und internationale IT-Teams',
+          projectsKicker: 'Software-Repositories',
+          projectsTitle: 'Ausgewählte Projekte',
+          projectsSubtitle: 'Zwei fokussierte Umsetzungen auf GitHub für relationale Desktop-CRUD-Systeme und objektorientierte Konsolen-Engines.',
+          archHeading: 'Wesentliche Architektur-Highlights',
+          btnViewGithub: 'Auf GitHub ansehen',
+          btnViewDetails: 'Readme & Architektur',
+          p1Category: 'Desktop-CRUD-Anwendung',
+          p1Tagline: 'Desktop-CRUD-Anwendung mit WPF (.NET) und MS SQL Server zur Verwaltung von Zoos, Tieren und deren relationalen Verknüpfungen.',
+          p1f1: '<strong>Vollständige CRUD-Operationen:</strong> Erstellen, Lesen, Aktualisieren und Löschen von Datensätzen in Echtzeit.',
+          p1f2: '<strong>Relationale Datenbank:</strong> Anbindung an MS SQL Server über Microsoft.Data.SqlClient (ADO.NET).',
+          p1f3: '<strong>Many-to-Many-Zuordnung:</strong> Dynamische Verknüpfung über Zwischentabellen mit SQL INNER JOINs.',
+          p1f4: '<strong>Schutz vor SQL-Injection:</strong> Konsequente Verwendung parametrisierter Abfragen.',
+          p2Category: 'Konsolen-Spiel & OOP-Architektur',
+          p2Tagline: 'Ein objektorientiertes Konsolen-Rollenspiel in C# mit Klassenauswahl, Mana-/Cooldown-Mechaniken, Inventar und Kampfprotokollen.',
+          p2f1: '<strong>OOP-Design:</strong> Eigene Vererbungshierarchie mit Klassen für Helden (Magier, Krieger) und Gegner (Drache).',
+          p2f2: '<strong>Dynamisches Kampfsystem:</strong> Formelbasierte Schadensberechnung, Mana-Verbrauch, Abklingzeiten.',
+          p2f3: '<strong>UI & Visuals:</strong> Farbcodierte Lebens- und Mana-Balken sowie formatierte ASCII-Ausgabe.',
+          p2f4: '<strong>Ressourcen-Management:</strong> Cooldown-Zähler, Heiltränke und Schleifenlogik.',
+          skillsKicker: 'Fachliche Kompetenzen & Tools',
+          skillsTitle: 'Fachliche Kenntnisse & Tools',
+          skillsSubtitle: 'Fundierte Basis erarbeitet durch kontinuierliches Selbststudium, zertifizierte Kurse und praktische Projektumsetzung.',
+          catLanguages: 'Programmiersprachen',
+          catFrameworks: 'Technologien & Frameworks',
+          catTools: 'Datenbanken & Entwickler-Tools',
+          lvlPrimary: 'Hauptsprache',
+          lvlDbQueries: 'Datenbankabfragen',
+          spokenLangsTitle: 'Sprachkenntnisse',
+          journeyKicker: 'Beruflicher Werdegang & Bildung',
+          journeyTitle: 'Erfahrung & Kurse',
+          journeySubtitle: 'Konsequenter Aufbau technischer Qualifikationen, disziplinierte Weiterbildung und praktische Erfahrung.',
+          filterAll: 'Alle',
+          filterExp: 'Praxis & IT',
+          filterEdu: 'Kurse & Bildung',
+          contactKicker: 'Direkter Kontakt',
+          contactTitle: 'Kontakt aufnehmen',
+          contactSubtitle: 'Aktuell verfügbar in Wien für Einstiegspositionen als Junior Software Engineer, Traineeprogramme oder IT-Praktika.',
+          contactLocLabel: 'Standort',
+          contactLocVal: 'Wien, Österreich (Offen für Vor-Ort & Hybrid/Remote)',
+          contactStatusLabel: 'Arbeitserlaubnis',
+          contactStatusVal: 'Sofort verfügbar · Volle Arbeitserlaubnis in Österreich / EU',
+          contactEmailLabel: 'Direkte E-Mail',
+          contactNote: 'Kontaktieren Sie mich gerne bezüglich Junior-Entwicklerstellen, Praktika oder fachlichen Kennenlerngesprächen in Wien oder remote.',
+          btnSendEmail: 'Nachricht per E-Mail senden',
+          btnCopyEmail: 'E-Mail-Adresse kopieren',
+          btnOpenCv: 'Lebenslauf öffnen',
+          modalOverview: 'Projektübersicht',
+          modalFeatures: 'Wichtige Funktionen & Architektur-Highlights',
+          modalTech: 'Technologie-Stack & Bibliotheken',
+          modalOpenGithub: 'Repository auf GitHub öffnen',
+          modalClose: 'Fenster schließen',
+          cvPrint: 'Drucken / Als PDF speichern',
+          cvProfileTitle: 'Kurzprofil',
+          cvProfileText: 'Motivierte Softwareentwicklerin mit fundierten Kenntnissen in C#, .NET, WPF, XAML und MS SQL Server. Hohe Eigeninitiative mit praktischer Erfahrung in der Entwicklung eigener Desktop-CRUD-Anwendungen, sauberer OOP-Architekturen und parametrisierter SQL-Abfragen.',
+          cvProjectsTitle: 'Realisierte Softwareprojekte auf GitHub',
+          cvEduTitle: 'Aus- & Weiterbildung',
+          tlSelfStudyRole: 'IT-Kenntnisse & Selbststudium',
+          tlSelfStudyInst: 'Selbstständige Weiterbildung',
+          tlSelfStudyDesc: 'Konsequenter Aufbau von IT- und Programmierkenntnissen im Selbststudium und eigenständige Umsetzung mehrerer Softwareprojekte mit C#, WPF, XAML und MS SQL Server.',
+          tlSelfStudyB1: 'Selbstständiges Erlernen von C# und moderner Desktop-Architektur.',
+          tlSelfStudyB2: 'Entwicklung von Desktop-Anwendungen mit CRUD, ADO.NET und XAML.',
+          tlSelfStudyB3: 'Praktische Arbeit mit JetBrains Rider, Database Explorer und Git.',
+          tlUdemyDesc: 'Umfassende Vertiefung der C#-Entwicklung von den Grundlagen bis zu fortgeschrittenen Architekturmustern: .NET, OOP, Clean Code, LINQ, WPF, Generics und Unit Tests.',
+          tlFuturefactoryDesc: 'Gezieltes Qualifizierungs- und Orientierungsprogramm für den erfolgreichen Einstieg in den österreichischen IT- und Technologiemarkt.',
+          tlLangsRole: 'Englischkurs (C1) & Deutschkurs (B2)',
+          tlLangsDesc: 'Zertifiziertes C1-Niveau für internationale Entwicklerteams und B2-Niveau für den Berufsalltag in Österreich.',
+          tlLuxSoundRole: 'Licht- & Tontechnikerin',
+          tlLuxSoundDesc: 'Veranstaltungstechnik auf Konzerten und Großevents mit bis zu 3.000 Personen.',
+          tlLuxSoundB1: 'Montage, Verkabelung und präzise Konfiguration der Bühnentechnik unter Zeitdruck.',
+          tlLuxSoundB2: 'Live-Soundchecks und schnelle Fehlerbehebung bei Signalstörungen.',
+          tlMaturaRole: 'Allgemeinbildende Oberschule – Matura',
+          tlMaturaDesc: 'Erfolgreich abgeschlossene Reifeprüfung (Matura) und fundierte technische Grundausbildung in Elektrotechnik/Elektronik.'
+        }
+      };
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        const dict = i18nDict[lang];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) {
+            el.innerHTML = dict[key];
+          }
+        });
+
+        // Toggle button styling
+        const btnEn = document.getElementById('btn-lang-en');
+        const btnDe = document.getElementById('btn-lang-de');
+        if (lang === 'en') {
+          btnEn.className = 'px-2 py-1 rounded transition-colors bg-sky-500 text-slate-950 font-bold shadow-sm';
+          btnDe.className = 'px-2 py-1 rounded transition-colors text-slate-400 hover:text-slate-200';
+        } else {
+          btnDe.className = 'px-2 py-1 rounded transition-colors bg-sky-500 text-slate-950 font-bold shadow-sm';
+          btnEn.className = 'px-2 py-1 rounded transition-colors text-slate-400 hover:text-slate-200';
+        }
+      }
+
+      function filterTimeline(type, btn) {
+        const items = document.querySelectorAll('.timeline-item');
+        items.forEach(item => {
+          if (type === 'all' || item.getAttribute('data-type') === type) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        const buttons = btn.parentElement.querySelectorAll('button');
+        buttons.forEach(b => {
+          b.className = 'px-3 py-1.5 rounded-md font-medium transition-colors text-slate-400 hover:text-slate-200';
+        });
+        btn.className = 'px-3 py-1.5 rounded-md font-medium transition-colors bg-sky-500 text-slate-950 font-bold';
+      }
+
+      function openProjectModal(key) {
+        const data = projectData[key][currentLang];
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-category').textContent = data.category;
+        document.getElementById('modal-tagline').textContent = data.tagline;
+        document.getElementById('modal-description').textContent = data.description;
+        document.getElementById('modal-github-link').href = data.github;
+
+        const featuresList = document.getElementById('modal-features-list');
+        featuresList.innerHTML = '';
+        data.features.forEach(feat => {
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-2.5';
+          const [prefix, ...rest] = feat.split(':');
+          li.innerHTML = `
+            <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <div>${rest.length > 0 ? `<strong class="text-white font-semibold">${prefix}:</strong><span>${rest.join(':')}</span>` : `<span>${feat}</span>`}</div>
+          `;
+          featuresList.appendChild(li);
+        });
+
+        const techList = document.getElementById('modal-tech-list');
+        techList.innerHTML = '';
+        data.tech.forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300';
+          span.textContent = t;
+          techList.appendChild(span);
+        });
+
+        const modal = document.getElementById('project-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeProjectModal() {
+        const modal = document.getElementById('project-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      function openCvModal() {
+        const modal = document.getElementById('cv-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeCvModal() {
+        const modal = document.getElementById('cv-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      function copyEmail(button) {
+        const email = 'jolanta.lodziana@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+          const original = button.innerHTML;
+          button.innerHTML = `
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-emerald-300 font-semibold">${currentLang === 'en' ? 'Copied to Clipboard!' : 'Kopiert!'}</span>
+          `;
+          setTimeout(() => {
+            button.innerHTML = original;
+          }, 2200);
+        });
+      }
+
+      // Close modals with Escape key
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeProjectModal();
+          closeCvModal();
+        }
+      });
+
+      // Close on backdrop click
+      document.getElementById('project-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'project-modal') closeProjectModal();
+      });
+      document.getElementById('cv-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'cv-modal') closeCvModal();
+      });
+    </script>
+  </body>
+</html>
